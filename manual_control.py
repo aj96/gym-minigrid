@@ -12,6 +12,9 @@ def redraw(img):
     if not args.agent_view:
         img, observable_img = env.render('rgb_array', tile_size=args.tile_size)
 
+    if args.observable:
+        _, img = env.render('rgb_array', tile_size=args.tile_size)
+
     window.show_img(img)
 
 def reset():
@@ -96,6 +99,11 @@ parser.add_argument(
     help="draw the agent sees (partially observable view)",
     action='store_true'
 )
+parser.add_argument(
+    '--observable',
+    default=False,
+    help="draw only what the agent can observe",
+    action='store_true')
 
 args = parser.parse_args()
 
