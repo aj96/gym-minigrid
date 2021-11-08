@@ -1287,12 +1287,17 @@ class MiniGridEnv(gym.Env):
             self.agent_dir,
             highlight_mask=highlight_mask if highlight else None
         )
+        
+        nonzero_inds = highlight_mask.nonzero()
+        xmin, xmax = nonzero_inds[0].min(), nonzero_inds[0].max()
+        ymin, ymax = nonzero_inds[1].min(), nonzero_inds[1].max()
+        observable_img = img[ymin*tile_size:(ymax+1)*tile_size, xmin*tile_size:(xmax+1)*tile_size]
 
         if mode == 'human':
             self.window.set_caption(self.mission)
             self.window.show_img(img)
 
-        return img
+        return img, observable_img
 
     def close(self):
         if self.window:
