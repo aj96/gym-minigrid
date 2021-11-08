@@ -10,7 +10,7 @@ from gym_minigrid.window import Window
 
 def redraw(img):
     if not args.agent_view:
-        img = env.render('rgb_array', tile_size=args.tile_size)
+        img, observable_img = env.render('rgb_array', tile_size=args.tile_size)
 
     window.show_img(img)
 
